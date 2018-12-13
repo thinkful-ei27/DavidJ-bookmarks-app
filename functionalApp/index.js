@@ -1,6 +1,6 @@
 const STORE = {
 
-  items: [{id: 'cuidahw18sjv1j', title: "YouTube", rating: 4, displayDetail: true, description: 'A wonderfully accurate source of news and Culture'}],
+  items: [{id: 'cuidahw18sjv1j', title: "YouTube", URL: 'www.youtube.com', rating: 4, displayDetail: true, description: 'A wonderfully accurate source of news and Culture'}],
   ratingsToDisplay: 1,
   addBookmarkModal: false
 };
@@ -12,18 +12,18 @@ function generateItemElementHTML(item) {
     return `
     <li class="bookmark-item" role="listitem" id="${item.id}">
     <section class="inner-item">
-      <h2 class="item-title">${item.title}</h2>
+      <p class="item-title">Item Title: ${item.title}</p>
       <p class="item-rating">Rating: ${item.rating}</p>
+      <p class="item-URL">Visit Site: ${item.URL}</p>
+      <p class="item-Description" role="note">Description: ${item.description}</p>
     </section>
     </li>`
   } else {
       return `
       <li class="bookmark-item" role="listitem" id="${item.id}">
       <section class="inner-item">
-        <h2 class="item-title">${item.title}</h2>
+        <p class="item-title">${item.title}</p>
         <p class="item-rating">Rating: ${item.rating}</p>
-        <p class="item-URL">Visit Site: ${item.URL}</p>
-        <p class="item-Description" role="note">Description: ${item.description}</p>
       </section>
       </li>`
   }

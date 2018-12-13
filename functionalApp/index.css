@@ -1,0 +1,72 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.total-container {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#my-bookmarks-title {
+  text-align: center;
+}
+.container-button-and-select {
+  display:flex;
+  justify-content: center;
+}
+
+.rating-filter-select {
+  text-align: center;
+}
+
+.js-list {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.bookmark-item {
+  position: relative;
+  width: 80%;
+  height: 250px;
+  left: 10%;
+  padding: 25px;
+}
+
+.inner-item {
+  position: relative;
+  width: 90%;
+  height: 100%;
+  left: 5%;
+  border: 1px solid grey;
+}
+.inner-item > p {
+  display: inline;
+}
+
+.item-title {
+  position: absolute;
+  left: 0px;
+  top: 10px;
+}
+
+.item-rating {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+}
+
+.item-URL {
+  position: absolute;
+  top: 40px;
+}
+.item-Description {
+  position: absolute;
+  top: 80px;
+}
+
+

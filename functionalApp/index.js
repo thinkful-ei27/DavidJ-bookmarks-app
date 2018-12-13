@@ -16,6 +16,7 @@ function generateItemElementHTML(item) {
       <p class="item-rating">Rating: ${item.rating}</p>
       <p class="item-URL">Visit Site: ${item.URL}</p>
       <p class="item-Description" role="note">Description: ${item.description}</p>
+      <button type="button" class="item-delete-button">Delete</button>
     </section>
     </li>`
   } else {
@@ -48,7 +49,33 @@ function renderShoppingList() {
   $('.js-list').html(ItemsHTMLString);
 }
 
+function handleAddItemButton() {
+  $('.add-bookmark-button').on('click', (event) => {
+    STORE.addBookmarkModal = true;
+  })
+}
+
+function handleRemoveBookmarkButton() {
+  //YOU HAVE TO ADD A BUTTON TO THE LIST ITEMS
+}
+
+function getItemIndexFromElement(item) {
+  const itemIndexString = $(item)
+    .closest('.bookmark-item')
+    .attr('data-item-index');
+  return parseInt(itemIndexString, 10);
+}
+
+function handleRatingSelect() {
+  $('.rating-filter-select').on('change', (event) => {
+    STORE.ratingsToDisplay = $('.rating-filter-select').val();
+  })
+}
+
 function main() {
-  renderShoppingList()
+  renderShoppingList();
+  handleRatingSelect()
+  handleAddItemButton();
+  renderShoppingList();
 }
 $(main());

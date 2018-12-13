@@ -15,6 +15,7 @@ body {
 #my-bookmarks-title {
   text-align: center;
 }
+
 .container-button-and-select {
   display:flex;
   justify-content: center;
@@ -64,9 +65,15 @@ body {
   position: absolute;
   top: 40px;
 }
+
 .item-Description {
   position: absolute;
   top: 80px;
+}
+.item-delete-button {
+  position: absolute;
+  bottom: 0px;
+  left: 40%;
 }
 
 

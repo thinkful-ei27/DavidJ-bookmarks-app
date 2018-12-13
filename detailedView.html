@@ -7,40 +7,43 @@
   <title>Document</title>
 </head>
 <body>
-  <button type ="button">Add Bookmark</button>
-  <select>
-    <option value="">Rating to Display</option>  
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
-  <ul>
-    <li class="bookmark-item">
-      <section class="inner-item">
-        <p>10 Best Slow Cooker Recipes for Winter</p>Rating: 3
-      </section>
-    </li>
-    <li class="bookmark Item">
-      <section class="inner-item">
-        <p>Apples Vs Oranges: you won't believe the difference!!!</p>Rating: 4
-      </section>
-    </li>
-    <li class="bookmark-item">
-      <section class="inner-item">
-        <p>Dr. Brojangle tips for happiness</p>Rating: 5
-      </section>
+  <main role="main">
+    <h1 role="banner">My Bookmarks</h1>
+    <button type ="button" role="button">Add Bookmark</button>
+    <select role="combobox">
+      <option value="">Rating to Display</option>  
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <ul role="list">
+      <li class="bookmark-item" role="listitem">
+        <section class="inner-item">
+          <p>10 Best Slow Cooker Recipes for Winter</p>Rating: 3
+        </section>
       </li>
-    <li class="bookmark-item">
-      <section class="inner-item">
-        <p class="item-title">Youtube</p>
-        <p class="item-rating"> Rating: 3</p>
-        <p class="item-URL">Visit Site: https://www.youtube.com/freecodecamp/live</p>
-        <p class="item-Description">Description: A wonderfully accurate source of news and culture</p>
-      </section>
-    </li>
-  </ul>  
+      <li class="bookmark Item" role="listitem">
+        <section class="inner-item">
+          <p>Apples Vs Oranges: you won't believe the difference!!!</p>Rating: 4
+        </section>
+      </li>
+      <li class="bookmark-item" role="listitem">
+        <section class="inner-item">
+          <p>Dr. Brojangle tips for happiness</p>Rating: 5
+        </section>
+        </li>
+      <li class="bookmark-item" role="listitem">
+        <section class="inner-item">
+          <p class="item-title">Youtube</p>
+          <p class="item-rating"> Rating: 3</p>
+          <p class="item-URL">Visit Site: https://www.youtube.com/freecodecamp/live</p>
+          <p class="item-Description" role="note">Description: A wonderfully accurate source of news and culture</p>
+        </section>
+      </li>
+    </ul>
+</main>  
 </body>
 </html>
 <!--

@@ -72,8 +72,9 @@ function handleRatingSelect() {
   })
 }
 */
+STORE.populateItems();
 function main() {
   bookmark.renderBookmarks();
-  api.getItems( (data) => console.log(data));
+
 }
 $(main());

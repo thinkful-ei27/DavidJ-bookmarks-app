@@ -19,7 +19,7 @@ const api = (function () {
 
     const errorCallback = function(error) {
       const errorMessage = error.responseJSON.message;
-      store.addError(errorMessage);
+      store.newError(errorMessage);
       bookmarks.render();
       store.clearError();
     };

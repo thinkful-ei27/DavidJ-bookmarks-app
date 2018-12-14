@@ -8,8 +8,8 @@ const bookmark = (function() {
         <section class="inner-item">
           <p class="item-title">Item Title: ${item.title}</p>
           <p class="item-rating">Rating: ${item.rating}</p>
-          <p class="item-URL">Visit Site: ${item.URL}</p>
-          <p class="item-Description" role="note">Description: ${item.description}</p>
+          <p class="item-URL">Visit Site: ${item.url}</p>
+          <p class="item-Description" role="note">Description: ${item.desc}</p>
         </section>
         <button type="button" class="item-delete-button">Delete</button>
       </li>`;
@@ -65,6 +65,9 @@ const bookmark = (function() {
 
   function renderBookmarks() {
     let ItemsHTMLString = "";
+    if (STORE.error !== "") {
+      alert(STORE.error);
+    }
     if (STORE.addBookmarkModal) {
       ItemsHTMLString = generateAddButtonHTML()
     } else {
@@ -122,7 +125,8 @@ const bookmark = (function() {
 
   function handleRatingSelect() {
     $('.rating-filter-select').on('change', (event) => {
-      STORE.ratingsToDisplay = $('.rating-filter-select').val();
+      let newRating = $('.rating-filter-select').val();
+      STORE.changeRatingToDisplay(newRating);
       renderBookmarks();
     })
   }

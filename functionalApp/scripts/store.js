@@ -18,8 +18,14 @@ const STORE = (function() {
   }
 
   function toggleModal() {
-    console.log('Modal Toggled');
-    (this.addBookmarkModal) = !(this.addBookmarkModal);
+    if (this.addBookmarkModal) {
+      this.addBookmarkModal = false;
+    } else {
+      this.addBookmarkModal = true;
+    }
+    //this.addBookmarkModal ? false : true;
+
+    console.log(`Modal Toggled to ${this.addBookmarkModal}`);
   }
 
 

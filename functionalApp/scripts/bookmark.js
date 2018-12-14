@@ -24,6 +24,26 @@ const bookmark = (function() {
         </li>`;
     }
   }
+  function generateAddButtonHTML() {
+    return `
+    <form action="#" method="GET" id="add-bookmark-form" role="form">
+      <label for="add-item-title">Title</label>
+      <input type="text" name="add-item-title" class="add-item-title">
+      <label for="add-item-url">URL</label>
+      <input type="text" name="add-item-url" class="add-item-url">
+      <label for="add-item-description"></label>
+      <input type="text" name="add-item-description" class="add-item-description">
+      <select class="add-item-rating">
+        <option value="">Set Page Rating</option>  
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button type="submit" form="add-bookmark-form" value="Submit" class="add-bookmark-form-button">Add Item</button>
+  </form>`
+  }
   
   function filterByRating(items) {
     let spreadItems = [...items];
@@ -32,7 +52,6 @@ const bookmark = (function() {
 
   function generateItemsString(Item) {
     const filteredItems = filterByRating(Item);
-    console.log(Item)
     const items = filteredItems.map( item => generateItemElementHTML(item))
     return items.join("");
   }
@@ -45,7 +64,12 @@ const bookmark = (function() {
   }
 
   function renderBookmarks() {
-    let ItemsHTMLString = generateItemsString(STORE.items)
+    let ItemsHTMLString = "";
+    if (STORE.addBookmarkModal) {
+      ItemsHTMLString = generateAddButtonHTML()
+    } else {
+     ItemsHTMLString = generateItemsString(STORE.items)
+    }
     $('.js-list').html(ItemsHTMLString);
     eventListener();
   }
@@ -55,6 +79,28 @@ const bookmark = (function() {
       STORE.toggleModal();
       renderBookmarks();
     })
+  }
+
+  function handleAddItemSubmit() {
+    $('#add-bookmark-form').submit( (event) => {
+      event.preventDefault();
+      let newTitle = $('.add-item-title').val();
+      let newURL = $('.add-item-url').val();
+      let newDescription = $('.add-item-description').val();
+      let newRating = $('.add-item-rating').val();
+      let newItem = {
+        id: cuid(),
+        title: newTitle,
+        url: newURL + "",
+        rating: newRating,
+        displayDetail: false,
+        description: newDescription
+      }
+      STORE.addItem(newItem);
+      console.log(`New Title: ${newTitle}, new URL: ${newURL}, new description: ${newDescription}, new Rating: ${newRating}`);
+      STORE.toggleModal();
+      renderBookmarks();
+      })
   }
 
   function handleRemoveBookmarkButton() {
@@ -83,6 +129,7 @@ const bookmark = (function() {
 
   function eventListener() {
     handleAddItemButton();
+    handleAddItemSubmit()
     handleRemoveBookmarkButton();
     handledClickToExpand();
     handleRatingSelect();

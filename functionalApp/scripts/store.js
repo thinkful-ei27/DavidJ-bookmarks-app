@@ -5,7 +5,9 @@ const STORE = (function() {
   let error = "";
 
   function addItem(item) {
-    api.createItem(item, () => populateItems())
+    api.createItem(item, () => {
+      populateItems();
+    })
 
   }
 
@@ -15,7 +17,10 @@ const STORE = (function() {
   }
   const findAndDelete = function(id) {
     console.log(`Deleting item with ID: ${id}`)
-    this.items = this.items.filter( object => object.id !== id);
+    api.deleteItem(id, () => {
+      populateItems();
+    })
+    //this.items = this.items.filter( object => object.id !== id);
   }
 
   function setModalTrue() {

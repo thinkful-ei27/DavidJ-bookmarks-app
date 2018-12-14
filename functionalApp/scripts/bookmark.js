@@ -74,7 +74,6 @@ const bookmark = (function() {
      ItemsHTMLString = generateItemsString(STORE.items)
     }
     $('.js-list').html(ItemsHTMLString);
-    eventListener();
   }
 
   function handleAddItemButton() {
@@ -85,7 +84,7 @@ const bookmark = (function() {
   }
 
   function handleAddItemSubmit() {
-    $('#add-bookmark-form').submit( (event) => {
+    $('.total-container').on('submit', $('#add-bookmark-form'), (event) => {
       event.preventDefault();
       let newTitle = $('.add-item-title').val();
       let newURL = $('.add-item-url').val();
@@ -97,7 +96,7 @@ const bookmark = (function() {
         desc: newDescription,
         rating: newRating,
       }
-      STORE.addItem(newItem);
+      STORE.addItem(newItem)
       console.log(`New Title: ${newTitle}, new URL: ${newURL}, new description: ${newDescription}, new Rating: ${newRating}`);
       STORE.setModalfalse();
       renderBookmarks();

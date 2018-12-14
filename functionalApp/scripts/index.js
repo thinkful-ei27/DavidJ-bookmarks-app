@@ -74,6 +74,6 @@ function handleRatingSelect() {
 */
 function main() {
   bookmark.renderBookmarks();
-  console.log('I work!');
+  api.getItems( (data) => console.log(data));
 }
 $(main());

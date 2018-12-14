@@ -1,4 +1,4 @@
-const STORE = {
+/*const STORE = {
 
   items: [{id: 'cuidahw18sjv1j', title: "YouTube", URL: 'www.youtube.com', rating: 4, displayDetail: true, description: 'A wonderfully accurate source of news and Culture'}],
   ratingsToDisplay: 1,
@@ -71,11 +71,9 @@ function handleRatingSelect() {
     STORE.ratingsToDisplay = $('.rating-filter-select').val();
   })
 }
-
+*/
 function main() {
-  renderShoppingList();
-  handleRatingSelect()
-  handleAddItemButton();
-  renderShoppingList();
+  bookmark.renderBookmarks();
+  console.log('I work!');
 }
 $(main());

@@ -6,12 +6,12 @@ const api = (function () {
     }
 
     function createItem(newItem, callback) {
-
+      console.log(newItem);
         $.ajax({
             url: `${BASE_URL}`,
             method: 'POST',
             contentType: 'application/json',
-            data: newItem,
+            data: JSON.stringify(newItem),
             success: callback,
             error: errorCallback
         });
@@ -19,9 +19,9 @@ const api = (function () {
 
     const errorCallback = function(error) {
       const errorMessage = error.responseJSON.message;
-      store.newError(errorMessage);
-      bookmarks.render();
-      store.clearError();
+      STORE.newError(errorMessage);
+      bookmark.renderBookmarks();
+      STORE.clearError();
     };
 
     function changeItem(newItem, id, callback) {

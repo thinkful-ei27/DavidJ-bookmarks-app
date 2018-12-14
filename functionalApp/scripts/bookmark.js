@@ -79,7 +79,7 @@ const bookmark = (function() {
 
   function handleAddItemButton() {
     $('.add-bookmark-button').on('click', () => {
-      STORE.toggleModal();
+      STORE.setModalTrue();
       renderBookmarks();
     })
   }
@@ -92,16 +92,14 @@ const bookmark = (function() {
       let newDescription = $('.add-item-description').val();
       let newRating = $('.add-item-rating').val();
       let newItem = {
-        id: cuid(),
         title: newTitle,
-        url: newURL + "",
+        url: `http://${newURL}`,
+        desc: newDescription,
         rating: newRating,
-        displayDetail: false,
-        description: newDescription
       }
       STORE.addItem(newItem);
       console.log(`New Title: ${newTitle}, new URL: ${newURL}, new description: ${newDescription}, new Rating: ${newRating}`);
-      STORE.toggleModal();
+      STORE.setModalfalse();
       renderBookmarks();
       })
   }

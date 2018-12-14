@@ -5,7 +5,7 @@ const STORE = (function() {
   let error = "";
 
   function addItem(item) {
-    this.items.push(item);
+    api.createItem(item, () => populateItems())
 
   }
 
@@ -18,20 +18,20 @@ const STORE = (function() {
     this.items = this.items.filter( object => object.id !== id);
   }
 
-  function toggleModal() {
-    if (this.addBookmarkModal) {
-      this.addBookmarkModal = false;
-    } else {
+  function setModalTrue() {
       this.addBookmarkModal = true;
-    }
     //this.addBookmarkModal === true ? false : true;  Not sure why this didn't work, but it didn't
-
     console.log(`Modal Toggled to ${this.addBookmarkModal}`);
   }
+
+  function setModalfalse() {
+    this.addBookmarkModal = false;
+    console.log(`Modal Toggled to ${this.addBookmarkModal}`);
+  }
+
   function populateItems() {
     api.getItems( (data) => {
       STORE.items = data;
-      bookmark.renderBookmarks();
     })
   }
 
@@ -55,7 +55,8 @@ const STORE = (function() {
     addItem,
     findByID,
     findAndDelete,
-    toggleModal,
+    setModalTrue,
+    setModalfalse,
     newError,
     populateItems,
     changeRatingToDisplay,

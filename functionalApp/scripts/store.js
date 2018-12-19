@@ -5,7 +5,9 @@ const STORE = (function() {
   let error = "";
 
   function addItem(item) {
+    console.log('Store.additem ran');
     api.createItem(item, () => {
+      console.log('Create Item succesfully called')
       populateItems();
     })
 
@@ -19,6 +21,7 @@ const STORE = (function() {
     console.log(`Deleting item with ID: ${id}`)
     api.deleteItem(id, () => {
       populateItems();
+      
     })
     //this.items = this.items.filter( object => object.id !== id);
   }
@@ -35,8 +38,11 @@ const STORE = (function() {
   }
 
   function populateItems() {
+    console.log('Populate Items called');
     api.getItems( (data) => {
       STORE.items = data;
+      console.log("pupulate Items successful")
+      bookmark.renderBookmarks();
     })
   }
 

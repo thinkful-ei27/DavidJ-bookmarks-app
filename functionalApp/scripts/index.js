@@ -75,7 +75,6 @@ function handleRatingSelect() {
 function main() {
   STORE.populateItems();
   bookmark.eventListener();
-  bookmark.renderBookmarks();
 
 }
 $(main());

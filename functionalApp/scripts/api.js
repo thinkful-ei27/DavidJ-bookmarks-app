@@ -6,7 +6,7 @@ const api = (function () {
     }
 
     function createItem(newItem, callback) {
-      //console.log(newItem);
+      console.log(newItem);
         $.ajax({
             url: `${BASE_URL}`,
             method: 'POST',

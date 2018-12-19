@@ -8,7 +8,7 @@ const bookmark = (function() {
         <section class="inner-item">
           <p class="item-title">Item Title: ${item.title}</p>
           <p class="item-rating">Rating: ${item.rating}</p>
-          <p class="item-URL">Visit Site: ${item.url}</p>
+          <p class="item-URL">Visit Site: <a href="${item.url}">${item.url}</a></p>
           <p class="item-Description" role="note">Description: ${item.desc}</p>
         </section>
         <button type="button" class="item-delete-button">Delete</button>
@@ -27,21 +27,24 @@ const bookmark = (function() {
   function generateAddButtonHTML() {
     return `
     <form action="#" method="GET" id="add-bookmark-form" role="form">
-      <label for="add-item-title">Title</label>
-      <input type="text" name="add-item-title" class="add-item-title">
-      <label for="add-item-url">URL</label>
-      <input type="text" name="add-item-url" class="add-item-url">
-      <label for="add-item-description"></label>
-      <input type="text" name="add-item-description" class="add-item-description">
-      <select class="add-item-rating">
-        <option value="">Set Page Rating</option>  
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      <button type="submit" form="add-bookmark-form" value="Submit" class="add-bookmark-form-button">Add Item</button>
+      <fieldset>
+        <legend>Add a new class</legend>
+        <label for="add-item-title">Title</label>
+        <input type="text" name="add-item-title" class="add-item-title">
+        <label for="add-item-url">URL</label>
+        <input type="text" name="add-item-url" class="add-item-url">
+        <label for="add-item-description"></label>
+        <input type="text" name="add-item-description" class="add-item-description">
+        <select class="add-item-rating">
+          <option value="">Set Page Rating</option>  
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button type="submit" form="add-bookmark-form" value="Submit" class="add-bookmark-form-button">Add Item</button>
+      </fieldset>
   </form>`
   }
   
@@ -90,6 +93,7 @@ const bookmark = (function() {
       let newURL = $('.add-item-url').val();
       let newDescription = $('.add-item-description').val();
       let newRating = $('.add-item-rating').val();
+      if (newRating == 0) newRating = 3;
       let newItem = {
         title: newTitle,
         url: `http://${newURL}`,
@@ -112,7 +116,7 @@ const bookmark = (function() {
   }
 
   function handledClickToExpand() {
-    $('.inner-item').on('click', (event) => {
+    $('.js-list').on('click', '.inner-item', (event) => {
       const id = getItemIdFromElement(event.target);
       const item = STORE.findByID(id);
       item.displayDetail = !(item.displayDetail);

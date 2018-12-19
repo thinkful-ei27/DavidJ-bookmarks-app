@@ -73,7 +73,8 @@ function handleRatingSelect() {
 }
 */
 function main() {
-  bookmark.renderBookmarks();
-  api.getItems( (data) => console.log(data));
+  STORE.populateItems();
+  bookmark.eventListener();
+
 }
 $(main());

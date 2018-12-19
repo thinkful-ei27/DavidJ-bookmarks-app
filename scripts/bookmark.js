@@ -8,8 +8,8 @@ const bookmark = (function() {
         <section class="inner-item">
           <p class="item-title">Item Title: ${item.title}</p>
           <p class="item-rating">Rating: ${item.rating}</p>
-          <p class="item-URL">Visit Site: ${item.URL}</p>
-          <p class="item-Description" role="note">Description: ${item.description}</p>
+          <p class="item-URL">Visit Site: <a href="${item.url}">${item.url}</a></p>
+          <p class="item-Description" role="note">Description: ${item.desc}</p>
         </section>
         <button type="button" class="item-delete-button">Delete</button>
       </li>`;
@@ -27,21 +27,24 @@ const bookmark = (function() {
   function generateAddButtonHTML() {
     return `
     <form action="#" method="GET" id="add-bookmark-form" role="form">
-      <label for="add-item-title">Title</label>
-      <input type="text" name="add-item-title" class="add-item-title">
-      <label for="add-item-url">URL</label>
-      <input type="text" name="add-item-url" class="add-item-url">
-      <label for="add-item-description"></label>
-      <input type="text" name="add-item-description" class="add-item-description">
-      <select class="add-item-rating">
-        <option value="">Set Page Rating</option>  
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-      </select>
-      <button type="submit" form="add-bookmark-form" value="Submit" class="add-bookmark-form-button">Add Item</button>
+      <fieldset>
+        <legend>Add a new class</legend>
+        <label for="add-item-title">Title</label>
+        <input type="text" name="add-item-title" class="add-item-title">
+        <label for="add-item-url">URL</label>
+        <input type="text" name="add-item-url" class="add-item-url">
+        <label for="add-item-description"></label>
+        <input type="text" name="add-item-description" class="add-item-description">
+        <select class="add-item-rating">
+          <option value="">Set Page Rating</option>  
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button type="submit" form="add-bookmark-form" value="Submit" class="add-bookmark-form-button">Add Item</button>
+      </fieldset>
   </form>`
   }
   
@@ -65,40 +68,41 @@ const bookmark = (function() {
 
   function renderBookmarks() {
     let ItemsHTMLString = "";
+    if (STORE.error !== "") {
+      alert(STORE.error);
+    }
     if (STORE.addBookmarkModal) {
       ItemsHTMLString = generateAddButtonHTML()
     } else {
      ItemsHTMLString = generateItemsString(STORE.items)
     }
     $('.js-list').html(ItemsHTMLString);
-    eventListener();
   }
 
   function handleAddItemButton() {
     $('.add-bookmark-button').on('click', () => {
-      STORE.toggleModal();
+      STORE.setModalTrue();
       renderBookmarks();
     })
   }
 
   function handleAddItemSubmit() {
-    $('#add-bookmark-form').submit( (event) => {
+    $('.total-container').on('submit', $('#add-bookmark-form'), (event) => {
       event.preventDefault();
       let newTitle = $('.add-item-title').val();
       let newURL = $('.add-item-url').val();
       let newDescription = $('.add-item-description').val();
       let newRating = $('.add-item-rating').val();
+      if (newRating == 0) newRating = 3;
       let newItem = {
-        id: cuid(),
         title: newTitle,
-        url: newURL + "",
+        url: `http://${newURL}`,
+        desc: newDescription,
         rating: newRating,
-        displayDetail: false,
-        description: newDescription
       }
-      STORE.addItem(newItem);
+      STORE.addItem(newItem)
       console.log(`New Title: ${newTitle}, new URL: ${newURL}, new description: ${newDescription}, new Rating: ${newRating}`);
-      STORE.toggleModal();
+      STORE.setModalfalse();
       renderBookmarks();
       })
   }
@@ -112,7 +116,7 @@ const bookmark = (function() {
   }
 
   function handledClickToExpand() {
-    $('.inner-item').on('click', (event) => {
+    $('.js-list').on('click', '.inner-item', (event) => {
       const id = getItemIdFromElement(event.target);
       const item = STORE.findByID(id);
       item.displayDetail = !(item.displayDetail);
@@ -122,7 +126,8 @@ const bookmark = (function() {
 
   function handleRatingSelect() {
     $('.rating-filter-select').on('change', (event) => {
-      STORE.ratingsToDisplay = $('.rating-filter-select').val();
+      let newRating = $('.rating-filter-select').val();
+      STORE.changeRatingToDisplay(newRating);
       renderBookmarks();
     })
   }
